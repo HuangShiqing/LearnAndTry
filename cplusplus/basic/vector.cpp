@@ -14,6 +14,7 @@ int main()
     vector<int> v2(10, 1);
     vector<int> v3{1, 2, 3, 4, 5, 6, 7, 8, 9};
     vector<int> v4(v3.begin(), v3.end());
+    vector<vector<int>> dp(10, vector<int>(10, 0));//初始化指定大小的二维v
 
     //访问
     int a = v2[0];

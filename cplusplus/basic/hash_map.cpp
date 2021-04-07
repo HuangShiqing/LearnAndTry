@@ -2,8 +2,7 @@
 #include <unordered_map>
 using namespace std;
 
-int main()
-{
+int main() {
     // 初始化
     unordered_map<string, int> map;
     map["a"] = 1;
@@ -14,10 +13,15 @@ int main()
         cout << "not found" << endl;
     else
         cout << "found" << endl;
-    if(map.count("a"))
+    if (map.count("a"))
         cout << "found" << endl;
 
     // 读取
     int num = map["a"];
+
+    // 遍历
+    for (auto it = map.begin(); it != map.end(); it++) {
+        cout<<it->second;
+    }
     return 0;
 }
