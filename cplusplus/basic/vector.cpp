@@ -51,5 +51,8 @@ int main()
 
     //获取内存指针
     int* p = v5.data();
+
+    //交换
+    iter_swap(v3.begin() + 1, v3.begin() + 2);
     return 0;
 }
