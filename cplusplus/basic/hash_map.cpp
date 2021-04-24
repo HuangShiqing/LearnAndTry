@@ -23,5 +23,8 @@ int main() {
     for (auto it = map.begin(); it != map.end(); it++) {
         cout<<it->second;
     }
+
+    // 根据key删除
+    map.erase("a");
     return 0;
 }

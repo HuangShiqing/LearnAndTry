@@ -8,7 +8,7 @@ int main()
     //初始化
     //初始化空vector
     vector<int> v;
-    //初始化大小和容量都为10的空vector
+    //初始化大小和容量都为10的空vector. 不能直接用于类成员变量的声明, 要先声明vector<int> v;然后在构造函数里v.resize(10);
     vector<int> v1(10);
     //初始化大小和容量都为10,值都为1的vector
     vector<int> v2(10, 1);
