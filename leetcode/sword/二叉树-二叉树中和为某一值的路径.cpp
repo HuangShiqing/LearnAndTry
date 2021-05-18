@@ -1,3 +1,65 @@
+// 剑指 Offer 34. 二叉树中和为某一值的路径
+// 输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。
+// 从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。
+
+// 示例:
+// 给定如下二叉树，以及目标和 target = 22，
+
+//               5
+//              / \
+//             4   8
+//            /   / \
+//           11  13  4
+//          /  \    / \
+//         7    2  5   1
+// 返回:
+// [
+//    [5,4,11,2],
+//    [5,8,4,5]
+// ]
+
+// 2021年05月15日21:35:29
+// 准备第一次社招
+// 思路: 满中规中矩的回溯. 就是需要注意路径要到底, 叶节点, 即left==nullptr&&right==nullotr
+
+struct TreeNode
+{
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL)
+    {
+    }
+};
+
+class Solution {
+public:
+
+    void pathSum(TreeNode* root, vector<vector<int>>& vv, vector<int>& v, int& value, int target){
+        if(!root)
+            return;
+        
+        value += root->val;
+        v.push_back(root->val);
+        if(value==target && root->left==nullptr && root->right==nullptr)//路径要到底, 叶节点
+            vv.push_back(v);
+
+        pathSum(root->left, vv, v, value, target);
+        pathSum(root->right, vv, v, value, target);
+
+        value-= root->val;
+        v.pop_back();
+    }
+
+    vector<vector<int>> pathSum(TreeNode* root, int target) {
+        vector<vector<int>> vv;
+        vector<int> v;
+        int value=0;
+        pathSum(root, vv, v, value, target);
+        return vv;
+    }
+};
+
 #include <iostream>
 #include <vector>
 #include <algorithm>

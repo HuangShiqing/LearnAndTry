@@ -1,10 +1,10 @@
-#include <string>
 #include <string.h>
+
+#include <string>
 #include <vector>
 using namespace std;
 
-class Solution
-{
+class Solution {
 public:
     // int gc_count = 0;
     // int gi_threshold = 0;
@@ -67,37 +67,33 @@ public:
     //     }
     //     return num;
     // }
-    bool *map = nullptr;
+    bool* map = nullptr;
     int g_threshold;
     int g_rows;
     int g_cols;
-    int g_count=0;
-    void movingCount_repeat(int rows, int cols)
-    {
-        if(rows<0||cols<0||rows>=g_rows||cols>=g_cols||map[rows*g_cols+cols]==true)
+    int g_count = 0;
+    void movingCount_repeat(int rows, int cols) {
+        if (rows < 0 || cols < 0 || rows >= g_rows || cols >= g_cols || map[rows * g_cols + cols] == true)
             return;
 
         string s1 = to_string(rows);
         string s2 = to_string(cols);
-        string s3 = s1+s2;
-        int num=0;
-        for(int i=0;i<s3.size();i++)
-            num+=s3[i]-'0';
-        if(num<=g_threshold)
-        {
+        string s3 = s1 + s2;
+        int num = 0;
+        for (int i = 0; i < s3.size(); i++)
+            num += s3[i] - '0';
+        if (num <= g_threshold) {
             g_count++;
-            map[rows*g_cols+cols]=true;
-            movingCount_repeat(rows,cols+1);
-            movingCount_repeat(rows,cols-1);
-            movingCount_repeat(rows+1,cols);
-            movingCount_repeat(rows-1,cols);
+            map[rows * g_cols + cols] = true;
+            movingCount_repeat(rows, cols + 1);
+            movingCount_repeat(rows, cols - 1);
+            movingCount_repeat(rows + 1, cols);
+            movingCount_repeat(rows - 1, cols);
         }
-        
     }
 
-    int movingCount(int threshold, int rows, int cols)
-    {
-        if (threshold <= 0||rows<=0||cols<=0)
+    int movingCount(int threshold, int rows, int cols) {
+        if (threshold <= 0 || rows <= 0 || cols <= 0)
             return 0;
 
         map = new bool[rows * cols];
@@ -111,11 +107,45 @@ public:
     }
 };
 
-int main()
-{
+int main() {
     Solution solution;
-    int r = solution.movingCount(10,1,10);
+    int r = solution.movingCount(10, 1, 10);
 
     return 0;
-
 }
+
+// 剑指 Offer 13. 机器人的运动范围
+// 地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0]
+// 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。
+// 例如，当k为18时，机器人能够进入方格[35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，
+// 因为3+5+3+8=19。请问该机器人能够到达多少个格子？
+
+// 示例 1：
+// 输入：m = 2, n = 3, k = 1
+// 输出：3
+// 示例 2：
+// 输入：m = 3, n = 1, k = 0
+// 输出：1
+
+// 2021年04月25日22:41:25
+// 准备第一次社招
+// 思路:
+// dfs回溯, 跟矩阵中的路径太类似了, 不写了, 就写个退出条件
+class Solution {
+public:
+    bool movingCount_repeat(int h, int w, int k) {
+        // ...
+        string s1 = to_string(h);
+        string s2 = to_string(w);
+        string s3 = s1 + s2;
+        int num = 0;
+        for (int i = 0; i < s3.size(); i++)
+            num += s3[i] - '0';
+        if (num > k)
+            return false;
+        // ...
+    }
+    int movingCount(int m, int n, int k) {
+
+    }
+};

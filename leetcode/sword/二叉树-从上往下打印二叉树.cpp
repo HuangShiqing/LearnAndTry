@@ -1,3 +1,66 @@
+// 剑指 Offer 32 - I. 从上到下打印二叉树
+// 从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。
+
+// 例如:
+// 给定二叉树: [3,9,20,null,null,15,7],
+//     3
+//    / \
+//   9  20
+//     /  \
+//    15   7
+// 返回：
+// [3,9,20,15,7]
+
+// -------------------第三次刷-----------------------
+// 2021年5月13日19:53:10
+// 准备第一次社招
+// 思路: 用一个前后都可以进出的队列即可. 每次递归都从deque里取出front node, 处理内容为把node->val保存, 
+// 然后把node->left和node->right先后push_back到deque里. 最后再执行一次递归函数. 递归结束的条件是deque为空
+
+#include <deque>
+using namespace std;
+#include <vector>
+struct TreeNode
+{
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+			val(x), left(NULL), right(NULL) {
+	}
+};
+
+class Solution {
+public:
+	void levelOrder_repeat(deque<TreeNode*>& d, vector<int>& v){
+		if(d.size()==0)
+			return;
+
+		TreeNode* root = d.front();
+		d.pop_front();
+		v.push_back(root->val);
+
+		if(root->left)
+			d.push_back(root->left);
+		if(root->right)
+			d.push_back(root->right);
+		levelOrder(d, v);
+	}
+
+    vector<int> levelOrder(TreeNode* root) {
+		vector<int> v;
+		deque<TreeNode*> d;
+		if(root==nullptr)
+			return v;
+
+		d.push_back(root);
+		levelOrder_repeat(d, v);
+
+		return v;
+    }
+};
+
+
 #include <iostream>
 #include <vector>
 #include <deque>
