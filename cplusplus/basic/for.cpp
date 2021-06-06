@@ -11,7 +11,10 @@ int main(int argc, char const* argv[]) {
     // 1.普通的for循环
     for (int n = 0; n < 50; ++n)
         std::cout << n << '\n';
-
+    // 两个索引数
+    for (int i = 0, j = 1; i < j; i++, j++) {
+        i++;
+    }
     // 2.用于容器的for循环
     for (auto it = list.begin(); it != list.end(); ++it)
         cout << *it << '\n';
@@ -24,6 +27,5 @@ int main(int argc, char const* argv[]) {
 
     // 5.
 
-    
     return 0;
 }

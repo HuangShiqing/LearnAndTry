@@ -1,3 +1,44 @@
+// 剑指 Offer 50. 第一个只出现一次的字符
+// 在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。
+
+// 示例:
+// s = "abaccdeff"
+// 返回 "b"
+// s = "" 
+// 返回 " "
+
+
+// -------------------第三次刷-----------------------
+// 2021年5月31日14:48:44
+// 准备第一次社招
+// 思路: 很简单, map就行
+
+#include <string>
+#include <unordered_map>
+using namespace std;
+
+class Solution {
+public:
+    char firstUniqChar(string s) {
+        unordered_map<char, int> map;
+        for(int i=0;i<s.size();i++){
+            if(map.find(s[i])==map.end()){
+                map[s[i]] = 1;
+            }
+            else{
+                // map.erase(s[i]);
+                map[s[i]]+=1;
+            }
+        }
+
+        for(int i=0;i<s.size();i++){
+            if(map[s[i]]==1)
+                return s[i];
+        }
+        return ' ';
+    }
+};
+
 //page 243
 #include <iostream>
 #include <unordered_map>

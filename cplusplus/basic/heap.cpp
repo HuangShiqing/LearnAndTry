@@ -29,6 +29,17 @@ int main()
     pop_heap(h_max.begin(),h_max.end(),less<int>());
     h_max.pop_back();
 
+    // 另一种最大堆的方式
+    priority_queue<int, vector<int>, less<int>> max_heap;
+    max_heap.push(3);
+    max_heap.pop();
+    int a = max_heap.top();
+
+    // 另一种最小堆的方式
+    priority_queue<int, vector<int>, greater<int>> min_heap;
+    min_heap.push(3);
+    min_heap.pop();
+    int a = min_heap.top();
     return 0;
 
 }

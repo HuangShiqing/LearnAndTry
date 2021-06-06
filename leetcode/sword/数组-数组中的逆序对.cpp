@@ -1,3 +1,72 @@
+// 剑指 Offer 51. 数组中的逆序对
+// 在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。
+
+// 示例 1:
+// 输入: [7,5,6,4]
+// 输出: 5
+
+// -------------------第三次刷-----------------------
+// 2021年5月31日14:48:44
+// 准备第一次社招
+// 思路: 归并, 过程不算难, 主要是要根据题意想到归并
+
+#include <vector>
+#include <algorithm>
+using namespace std;
+class Solution {
+public:
+    int count=0;
+    void MergeSort(vector<int>& nums, int start, int end){
+        if(start == end)
+            return;
+        // 这里相差1的情况是可以走下面的, 可以不特殊处理
+        // if(start +1 ==end){
+        //     if(nums[start]>nums[end]){
+        //         count++;
+        //         swap(nums[start], nums[end]);
+        //     }            
+        //     return;                
+        // }
+
+        int middle = (start+end)/2;
+        MergeSort(nums, start, middle);
+        MergeSort(nums, middle+1, end);
+
+        int p1=start;
+        int p2 = middle+1;
+        vector<int> v;
+        while(p1<=middle&&p2<=end){
+            if(nums[p1]>nums[p2]){
+                v.push_back(nums[p2++]);
+                count+=(middle-p1+1);//当p1>p2时, 由于p1已经是升序了, 那么p1后面的数肯定都大于p2           
+            }
+            else
+                v.push_back(nums[p1++]);
+        }
+        while(p1<=middle){
+            v.push_back(nums[p1++]);
+        }
+        while(p2<=end){
+            if(nums[p1]>nums[p2])
+                count++;
+            v.push_back(nums[p2++]);
+        }
+
+        for (int i = 0; i < v.size(); i++)
+            nums[start + i] = v[i];
+    }
+
+    int reversePairs(vector<int>& nums) {
+        if(nums.size()==0)
+            return count;
+        MergeSort(nums, 0, nums.size()-1);
+        return count;
+    }
+};
+
+
+
+
 //page 249
 #include <vector>
 #include <algorithm>

@@ -10,13 +10,39 @@
 // 输入：arr = [0,1,2,1], k = 1
 // 输出：[0]
 
+// -------------------第三次刷-----------------------
+// 2021年5月18日11:41:06
+// 准备第一次社招
+// 思路: 最大堆. 用一个最大堆来保存最小的k个数, 为什么是最大堆, 因为只要比较待判断的数arr[i]与最大堆的root->val(即v_max[0])的大小即可, 
+// 如果arr[i]>v_max[0], 那就去掉v_max[0], 插入arr[i]
+
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 class Solution {
 public:
     vector<int> getLeastNumbers(vector<int>& arr, int k) {
+        vector<int> h_max;
+        if(arr.size()==0||k<=0||k>arr.size())
+            return h_max;
+        for(int i=0;i<arr.size();i++){
+            if(i<k){
+                h_max.push_back(arr[i]);
+                push_heap(h_max.begin(),h_max.end(),less<int>());
+            }
+            else{
+                if(arr[i]<h_max[0])
+                {
+                    pop_heap(h_max.begin(),h_max.end(),less<int>());
+                    h_max.pop_back();
 
+                    h_max.push_back(arr[i]);
+                    push_heap(h_max.begin(),h_max.end(),less<int>());
+                }
+            }
+        }
+        return h_max;
     }
 };
 

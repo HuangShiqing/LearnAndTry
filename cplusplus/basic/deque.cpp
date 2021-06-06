@@ -2,6 +2,8 @@
 #include <deque>
 using namespace std;
 
+// queue队列只能从尾插入从头弹出, 访问是可以两头访问的
+// deque双端队列可以任何操作都可以对头尾进行, 包括访问, 插入, 弹出
 int main()
 {
     //初始化空队列
@@ -24,6 +26,11 @@ int main()
     dq.pop_front();
     //删除尾
     dq.pop_back();
+
+    // 获得信息
+    if(dq.empty())
+        return 0;
+    num = dq.size();
 
     return 0;
 

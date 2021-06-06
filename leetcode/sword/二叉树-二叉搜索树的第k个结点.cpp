@@ -1,3 +1,59 @@
+// 剑指 Offer 54. 二叉搜索树的第k大节点
+// 给定一棵二叉搜索树，请找出其中第k大的节点。
+
+// 示例 1:
+// 输入: root = [3,1,4,null,2], k = 1
+//    3
+//   / \
+//  1   4
+//   \
+//    2
+// 输出: 4
+
+// 示例 2:
+// 输入: root = [5,3,6,2,4,null,null,1], k = 3
+//        5
+//       / \
+//      3   6
+//     / \
+//    2   4
+//   /
+//  1
+// 输出: 4
+
+// -------------------第三次刷-----------------------
+// 2021年6月1日10:04:34
+// 准备第一次社招
+// 思路: 很简单, 中序遍历即可
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    vector<int> v;
+    void kthLargest(TreeNode* root){
+        if(root==nullptr)
+            return;
+        
+        kthLargest(root->left);
+        v.push_back(root->val);
+        kthLargest(root->right);
+    }
+    int kthLargest(TreeNode* root, int k) {
+        kthLargest(root);
+        if(v.size()>=k)
+            return v[v.size()-k];
+        else
+            return -1;s
+    }
+};
+
+
 #include <iostream>
 #include <vector>
 #include <stack>

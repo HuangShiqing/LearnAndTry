@@ -53,6 +53,12 @@ int main()
     int* p = v5.data();
 
     //交换
+    swap(v3[1], v3[2]);
     iter_swap(v3.begin() + 1, v3.begin() + 2);
+
+    //去重
+    sort(v1.begin(), v1.end());
+    vector<int>::iterator new_end = unique(v1.begin(), v1.end());
+    vector<int> v_uniqued(v1.begin(),new_end);
     return 0;
 }

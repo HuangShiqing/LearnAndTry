@@ -1,3 +1,52 @@
+// 剑指 Offer 57 - II. 和为s的连续正数序列
+// 输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。
+// 序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。
+
+// 示例 1：
+// 输入：target = 9
+// 输出：[[2,3,4],[4,5]]
+
+// 示例 2：
+// 输入：target = 15
+// 输出：[[1,2,3,4,5],[4,5,6],[7,8]]
+
+// -------------------第三次刷-----------------------
+// 2021年6月2日15:17:03
+// 准备第一次社招
+// 思路: 这里不是头尾双指针了, 因为头尾指针往中间靠都是减小和的操作, 没有增加和的操作. 那么就用双头指针. 增加和的操作为right++, 减小和的操作是left++
+// 注意: 相等的时候要left++, 因为循环时以left为基准的, left找到唯一的一个序列后要增加
+
+class Solution {
+public:
+    vector<vector<int>> findContinuousSequence(int target) {
+        int left = 1;
+        int right = 0;//我这里是左右都闭
+        int sum = 0;
+        vector<vector<int>> vv;
+        while(left<=target/2){//(target/2)+(target/2+1)肯定就已经大于target了, 后面就不用数了
+            if(sum==target){
+                vector<int> v;
+                for(int i=left;i<=right;i++){
+                    v.push_back(i);
+                }
+                vv.push_back(v);
+                sum-=left;
+                left++;
+            }
+            else if(sum < target){
+                right++;
+                sum+=right;
+            }
+            else{
+                sum-=left;
+                left++;
+            }
+        }
+
+        return vv;
+    }
+};
+
 //page:282
 #include <vector>
 #include <iostream>

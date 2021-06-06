@@ -1,3 +1,44 @@
+// 剑指 Offer 57. 和为s的两个数字
+// 输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。
+
+// 示例 1：
+// 输入：nums = [2,7,11,15], target = 9
+// 输出：[2,7] 或者 [7,2]
+
+// 示例 2：
+// 输入：nums = [10,26,30,31,47,60], target = 40
+// 输出：[10,30] 或者 [30,10]
+
+// -------------------第三次刷-----------------------
+// 2021年6月2日15:17:03
+// 准备第一次社招
+// 思路: 很简单, 双指针, 向中间靠拢
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int left = 0;
+        int right = nums.size()-1;
+        vector<int> r;
+        while(left<=right){
+            int sum = nums[left]+nums[right];
+            if(sum==target){
+                r.push_back(nums[left]);
+                r.push_back(nums[right]);
+                break;
+            }
+            else if(sum<target){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+
+        return r;
+    }
+};
+
+
 //page:280
 #include <vector>
 #include <iostream>

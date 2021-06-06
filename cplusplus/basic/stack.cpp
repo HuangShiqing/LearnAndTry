@@ -11,10 +11,13 @@ int main()
     //从尾部插入
     s.push(5);
 
-    //访问头
+    //访问栈顶
     int num = s.top();
+    //top不支持访问空栈
+    if(s.size())
+        num = s.top();
 
-    //从尾部删除
+    //弹出栈顶
     s.pop();
 
     return 0;
