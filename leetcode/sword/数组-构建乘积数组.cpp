@@ -9,7 +9,7 @@
 // -------------------第三次刷-----------------------
 // 2021年6月4日11:30:37
 // 准备第一次社招
-// 思路: 上下三角, 上三角为数组C, 下三角为数组D
+// 思路: 把"不乘以同下标i的元素"转化为"同下标i时乘以1". 上下三角, 上三角为数组C, 下三角为数组D
 // B0= 1 * A1 * A2 * A3 * A4
 // B1= A0 * 1 * A2 * A3 * A4
 // B2= A0 * A1 * 1 * A3 * A4
@@ -19,7 +19,29 @@
 class Solution {
 public:
     vector<int> constructArr(vector<int>& a) {
-        vector<int> C(a.size());
+        int n = a.size();
+        vector<int> C(n);
+        vector<int> D(n);
+        vector<int> r(n);
+        
+        if(n==0)
+            return r;
+
+        C[n-1] = 1;
+        for(int i=n-2;i>=0;i--){
+            C[i] = C[i+1]*a[i+1];
+        }
+
+        D[0] = 1;
+        for(int i=1;i<n;i++){
+            D[i] = D[i-1]*a[i-1];
+        }
+
+        for(int i=0;i<n;i++){
+            r[i] = C[i]*D[i];
+        }
+
+        return r;
     }
 };
 

@@ -1,3 +1,4 @@
 .vscode/
 Debug/
 .DS_Store
+*pyc

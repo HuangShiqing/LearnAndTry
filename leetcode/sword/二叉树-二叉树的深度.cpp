@@ -15,8 +15,7 @@
 // -------------------第三次刷-----------------------
 // 2021年6月1日10:04:34
 // 准备第一次社招
-// 思路: 很简单, 递归遍历即可
-
+// 思路1: 从上往下数, 很简单, 递归遍历即可. 
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -45,6 +44,17 @@ public:
     }
 };
 
+//思路2: 从下往上数. 返回值是pRoot的深度
+int TreeDepth(TreeNode *pRoot)
+{
+    //递归停止条件
+    if (pRoot == nullptr)
+        return 0;
+    //父层是子层的深度加1
+    int left = TreeDepth(pRoot->left);
+    int right = TreeDepth(pRoot->right);
+    return (left > right) ? (left + 1) : (right + 1);
+}
 
 //page 271
 struct TreeNode

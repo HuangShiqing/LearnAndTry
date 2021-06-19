@@ -75,11 +75,16 @@ public:
     }
 };
 
+int main(){
+    Solution s;
+    s.isMatch("", "..*");
+    return -1;
 
+}
 //page 124
-class Solution
-{
-public:
+// class Solution
+// {
+// public:
     // bool match_repeat(char *str, char *pattern)
     // {
     //     if (*str == '\0' && *pattern == '\0')
@@ -182,43 +187,43 @@ public:
     //         return false;
     // }
 
-    bool match_repeat(char *str, char *pattern)
-    {
-        if(*str=='\0'&&*pattern=='\0')
-            return true;
+    // bool match_repeat(char *str, char *pattern)
+    // {
+    //     if(*str=='\0'&&*pattern=='\0')
+    //         return true;
         
-        if(*(pattern+1)!='*')
-        {
-            if((*pattern=='.'&&*str!='\0')||*str==*pattern)
-                return match_repeat(str+1, pattern+1);
-            else
-                return false;
-        }
-        else
-        {
-            if((*pattern=='.'&&*str!='\0')||*str==*pattern)
-                return match_repeat(str, pattern+2)||match_repeat(str+1, pattern+2)||match_repeat(str+1, pattern);
-            else
-                return match_repeat(str, pattern+2);
-        }
+    //     if(*(pattern+1)!='*')
+    //     {
+    //         if((*pattern=='.'&&*str!='\0')||*str==*pattern)
+    //             return match_repeat(str+1, pattern+1);
+    //         else
+    //             return false;
+    //     }
+    //     else
+    //     {
+    //         if((*pattern=='.'&&*str!='\0')||*str==*pattern)
+    //             return match_repeat(str, pattern+2)||match_repeat(str+1, pattern+2)||match_repeat(str+1, pattern);
+    //         else
+    //             return match_repeat(str, pattern+2);
+    //     }
         
-    }
+    // }
 
-    bool match(char *str, char *pattern)
-    {
-        if(str==nullptr||pattern==nullptr)
-            return false;
+    // bool match(char *str, char *pattern)
+    // {
+    //     if(str==nullptr||pattern==nullptr)
+    //         return false;
         
-        return match_repeat(str,pattern);
-    }
-};
+    //     return match_repeat(str,pattern);
+    // }
+// };
 
-int main()
-{
-    char str[] = "";
-    char pattern[] = ".*";
+// int main()
+// {
+//     char str[] = "";
+//     char pattern[] = ".*";
 
-    Solution solution;
-    bool result = solution.match(str, pattern);
-    return 0;
-}
+//     Solution solution;
+//     bool result = solution.match(str, pattern);
+//     return 0;
+// }

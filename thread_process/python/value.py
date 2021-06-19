@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 from multiprocessing import Process, Value, Array, Manager
+import ctypes
 import time
+import numpy as np
 
 ## 一: Value和Array
 # 1.1: Value和Array都是进程安全, 不用自己上锁
