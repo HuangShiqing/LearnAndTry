@@ -9,6 +9,26 @@
 // 0 <= 节点个数 <= 5000
 
 // -------------------第三次刷-----------------------
+// 2021年6月21日10:19:51
+// 准备第一次社招
+// 思路: 已经比较熟练了. 记住一点, 将新head利用返回值一层层返回即可
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head==nullptr)//当输入是nullptr
+            return head;
+        if(head->next==nullptr)//递归到最后一个有意义的节点时直接返回即可
+            return head;        
+
+        ListNode* new_head = reverseList(head->next);
+        ListNode* new_tail = head->next->next;
+        head->next->next = head;
+        head->next = new_tail;
+        return new_head;
+    }
+};   
+
+// -------------------第三次刷-----------------------
 // 2021年5月12日17:18:35
 // 准备第一次社招
 // 思路: 递归, 首先当找到最后一个有效节点时立马返回. 然后把当前节点的后续节点递归反转好, 然后反转当前节点. 

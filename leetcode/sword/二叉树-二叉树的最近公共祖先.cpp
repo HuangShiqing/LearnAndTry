@@ -64,3 +64,29 @@ public:
         return ret;
     }
 };
+
+// 2021年6月30日15:03:58
+// 准备第一次社招
+// 思路2: 深度优先遍历, 找到pq分别是node的左右子树(或者其中一个就是该node). 赋值的条件不会进第二次, 因为只有一个
+// node是pq分布在左右子树两边, 对于再上面的公共祖先pq只会在一边
+class Solution {
+public:
+    TreeNode* ans;
+    bool dfs(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root==nullptr)
+            return false;
+        
+        bool lson = dfs(root->left, p, q);
+        bool rson = dfs(root->right, p, q);
+        //pq是左右子树或者其中一个就是root
+        if ((lson && rson) || ((root->val == p->val || root->val == q->val) && (lson || rson))) {
+            ans = root;
+        } 
+        return lson || rson || (root->val == p->val || root->val == q->val);
+    }
+    
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        dfs(root, p, q);
+        return ans;
+    }
+};

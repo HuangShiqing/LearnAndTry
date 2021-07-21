@@ -21,12 +21,26 @@
 // -------------------第三次刷-----------------------
 // 2021年6月3日14:30:29
 // 准备第一次社招
-// 思路:
+// 思路: 用一个最大堆. 但是不是直接存放nums[i], 而是存放一个pair<nums[i], i>, 因为需要判断max_heap.top还是否在窗口内
+#include <queue>
+using namespace std;
 
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-
+        priority_queue<pair<int, int>, vector<pair<int, int>>, less<pair<int, int>>> max_heap;
+        for(int i=0;i<k;i++){
+            max_heap.emplace(nums[i], i);
+        }
+        vector<int> ans  ={max_heap.top().first};
+        for(int i=k;i<nums.size();i++){
+            max_heap.emplace(nums[i], i);
+            while(max_heap.top().second<=i-k){//判断max_heap.top还是否在窗口内
+                max_heap.pop();
+            }
+            ans.push_back(max_heap.top().first);
+        }
+        return ans;
     }
 };
 
