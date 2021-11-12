@@ -21,7 +21,8 @@ using namespace std;
 // -------------------第二次刷-----------------------
 // 2021年6月8日15:55:01
 // 准备第一次社招
-// 思路1: 即使不是全部有序, 也可以直接二分. 先判断left到middle段是否有序, 如果有序且target位于其中, 则缩小右界, 如果有序但target不在其中, 则缩小左界
+// 思路1: 即使不是全部有序, 也可以直接二分. 先根据left, right, middle判断当前处于哪一段有序数组. 
+// 然后就一般的二分判断. target位于middle左侧, 则缩小右界, 否则缩小左界
 class Solution {
 public:
     int search(const vector<int>& nums, int target) {
@@ -32,13 +33,13 @@ public:
             if(nums[middle] == target)
                 return middle;
             
-            if(nums[left]<=nums[middle]){
+            if(nums[left]<=nums[middle]){//左半段
                 if(nums[left]<=target&&target<=nums[middle])
                     right = middle - 1;
                 else
                     left = middle + 1;
             }
-            else{
+            else{//右半段
                 if(nums[middle]<target&&target<=nums[right])
                     left = middle + 1;
                 else

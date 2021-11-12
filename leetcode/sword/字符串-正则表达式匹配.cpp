@@ -43,11 +43,48 @@
 // 准备第一次社招
 // 思路: 字符串逐个操作的应该想到思路就是index+递归. 递归里先写完成退出条件和错误退出条件, 然后根据是否是x*分成两种情况, 是x*又可以分为x*生效0次, 1次, 多次进行递归
 // 但是我的退出条件好像一直有问题, shift
+// 思路2: dp
 #include <string>
+#include <vector>
 using namespace std;
 
 class Solution {
 public:
+    // 思路2
+    bool isMatch(string s, string p) {
+        int m = s.size();
+        int n = p.size();
+
+        auto matches = [&](int i, int j) {
+            if (i == 0) {
+                return false;
+            }
+            if (p[j - 1] == '.') {
+                return true;
+            }
+            return s[i - 1] == p[j - 1];
+        };
+
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1));//dp[i][j]表示前i个和前j个是否匹配
+        dp[0][0] = true;
+        for (int i = 0; i <= m; ++i) {
+            for (int j = 1; j <= n; ++j) {
+                if (p[j - 1] == '*') {
+                    dp[i][j] |= dp[i][j - 2];
+                    if (matches(i, j - 1)) {
+                        dp[i][j] |= dp[i - 1][j];
+                    }
+                }
+                else {
+                    if (matches(i, j)) {
+                        dp[i][j] |= dp[i - 1][j - 1];
+                    }
+                }
+            }
+        }
+        return dp[m][n];
+    }
+
     bool isMatch_repeat(string& s, int index_s, string& p, int index_p){
         if(index_s == s.size() && index_p == p.size())
             return true;

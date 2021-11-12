@@ -23,9 +23,38 @@ using namespace std;
 // 2021年7月21日15:49:27
 // 准备第一次社招
 // 思路:
-// 解题思路 https://www.cnblogs.com/mfrank/p/10472651.html
+// 思路一: 非常基础的滑动窗口, left和right作为两边, map作为记录窗口内的元素. 循环right往右移, 出现重复则从left
+// 开始删除直到没有重复. 
+// 滑动窗口的题目
+// 3. 无重复字符的最长子串
+// 30. 串联所有单词的子串
+// 76. 最小覆盖子串
+// 159. 至多包含两个不同字符的最长子串
+// 209. 长度最小的子数组
+// 239. 滑动窗口最大值
+// 567. 字符串的排列
+// 632. 最小区间
+// 727. 最小窗口子序列
+
 class Solution {
 public:
+    // 思路一
+    int lengthOfLongestSubstring(string s) {
+        int left = 0;
+        unordered_map<char, int> map;
+        int maxlength=0;
+        for(int right=0; right<s.size();right++){
+            while(map.count(s[right])){
+                map.erase(s[left]);
+                left++;
+            }
+            maxlength = max(maxlength, right-left+1);
+            map[s[right]]++;
+        }
+        return maxlength;
+    }
+
+    // 不容易理解的思路, 解题思路 https://www.cnblogs.com/mfrank/p/10472651.html
     int lengthOfLongestSubstring(string s) {
         //特殊情况就为一个字符
         if(s.size()==1)

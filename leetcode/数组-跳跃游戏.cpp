@@ -59,7 +59,7 @@ using namespace std;
 bool canJump(vector<int>& nums) {
     int d = 0;//能跳到的最远index
     for (int i = 0; i < nums.size(); i++) {
-        if (i > d)
+        if (i > d)//如果跳不到当前的i则退出
             return false;
         d = max(d,i+nums[i]);//后面能跳的最远距离可能小于前面的
     }

@@ -28,6 +28,7 @@ using namespace std;
 // 准备第一次社招
 // 思路:
 // 三指针：left 指针指向数组的开始；right 指针指向数组的结尾。滑动index
+// 0区间不包括left和2区间不包括right,即 [0,left)都是0, [left, i)都是1, [i,right]待处理的, (right, end]都是2
 // 若 index 位置上的元素值为 0，则说明是红色，要放在最前面，即和 left 指针指向位置上的元素进行交换；
 // 若 index 位置上的元素值为 1，则说明是白色（本来就是要放在中间）不需要进行交换，直接将 index 指针后移；
 // 若 index 位置上的元素值为 2，则说明是蓝色，要放在最后面，即和 right 指针指向位置上的元素进行交换。
@@ -36,21 +37,15 @@ public:
     void sortColors(vector<int>& nums) {
         int left = 0;
         int right = nums.size() - 1;
-        int index = 0;
-        while (index <= right) {
-            if (nums[index] == 0) {
-                // iter_swap(nums.begin() + index, nums.begin() + left);
-                swap(nums[index], nums[left]);
-                left++;
-                index++;
-            }
-            else if(nums[index] == 1)
-                index++;
-            else if(nums[index]==2)
-            {
-                // iter_swap(nums.begin() + index, nums.begin() + right);
-                swap(nums[index], nums[right]);
+    
+        for(int i=0;i<right;i++){
+            while(i<right&&nums[i]==2){//右边的被交换过来是未知的, 因此要while
+                swap(nums[i], nums[right]);
                 right--;
+            }
+            if(nums[i]==0){//已知left指向的是1, 所以不用while
+                swap(nums[i], nums[left]);
+                left++;
             }
         }
     }
