@@ -5,6 +5,11 @@
 
 using namespace std;
 
+static bool cmp(pair<int, int>& m, pair<int, int>& n) {
+    return m.second > n.second;
+}
+
+//大小堆的top操作时间复杂度是O(1), push和pop的时间复杂度是O(n)
 
 int main()
 {
@@ -41,6 +46,8 @@ int main()
     min_heap.push(3);
     min_heap.pop();
     int a = min_heap.top();
-    return 0;
 
+    // 元素是pair, 自定义比较函数
+    priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(&cmp)> q(cmp);
+    return 0;
 }

@@ -19,7 +19,8 @@ int main()
     char cs[] = "12345";
     string s8(cs, 3);    //复制字符串cs的前3个字符到s当中
     string s9(s1, 2, 1); //将s1从index=2开始赋值长度为1的区域给s8长度
-
+    string s13 = s1.substr(1,2);//start,length
+    
     //访问
     char c = s1[1];//string单个访问是一个char类型字符
 
@@ -53,6 +54,5 @@ int main()
 
     //查询
     int index = s11.find('1'); //查询字符'1'在s11中出现的位置，失败返回-1。也可以查询字符串
-    string s13 = s1.substr(1,2);//start,length
     return 0;
 }
